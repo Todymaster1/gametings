@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cye5kyres1ung"
+path="res://.godot/imported/🍂 [Copyright Free Chill Background Music] - _Way Home_ by @tokyomusicwalker4038   🇯🇵.mp3-66e4beb43456a6f06d6b73a5d15912fb.mp3str"
+
+[deps]
+
+source_file="res://FPS-controller-assets-main/🍂 [Copyright Free Chill Background Music] - _Way Home_ by @tokyomusicwalker4038   🇯🇵.mp3"
+dest_files=["res://.godot/imported/🍂 [Copyright Free Chill Background Music] - _Way Home_ by @tokyomusicwalker4038   🇯🇵.mp3-66e4beb43456a6f06d6b73a5d15912fb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

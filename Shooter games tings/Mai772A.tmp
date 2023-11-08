@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://ooysn4rnpcrn"]
+
+[ext_resource type="Texture2D" uid="uid://c0dwio1qedesk" path="res://FPS-controller-assets-main/assets/textures/dev/grids/Dark/texture_07.png" id="1_s0xy1"]
+[ext_resource type="Texture2D" uid="uid://hh7y4psvwbyy" path="res://FPS-controller-assets-main/assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="2_nrt3n"]
+[ext_resource type="Script" path="res://Player.gd" id="3_0rwsu"]
+[ext_resource type="AudioStream" uid="uid://cye5kyres1ung" path="res://FPS-controller-assets-main/🍂 [Copyright Free Chill Background Music] - _Way Home_ by @tokyomusicwalker4038   🇯🇵.mp3" id="4_ebht7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbggh"]
+albedo_texture = ExtResource("1_s0xy1")
+uv1_triplanar = true
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_i6kja"]
+panorama = ExtResource("2_nrt3n")
+
+[sub_resource type="Sky" id="Sky_eabwk"]
+sky_material = SubResource("PanoramaSkyMaterial_i6kja")
+
+[sub_resource type="Environment" id="Environment_fys3d"]
+background_mode = 2
+sky = SubResource("Sky_eabwk")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_us8ay"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iputw"]
+height = 1.2
+
+[node name="World" type="Node3D"]
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_gbggh")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stage/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5786, 2.58751, 0)
+use_collision = true
+size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_gbggh")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_fys3d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("3_0rwsu")
+
+[node name="Standing_Collision_Shape" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09566, 0)
+shape = SubResource("CapsuleShape3D_us8ay")
+
+[node name="Crouching_Collision_Shape" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.652913, 0)
+shape = SubResource("CapsuleShape3D_iputw")
+disabled = true
+
+[node name="RayCast3D" type="RayCast3D" parent="Player"]
+target_position = Vector3(0, 2, 0)
+
+[node name="Neck" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Head" type="Node3D" parent="Player/Neck"]
+
+[node name="Camera3D" type="Camera3D" parent="Player/Neck/Head"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ebht7")
+volume_db = 0.05
+autoplay = true
+mix_target = 1
